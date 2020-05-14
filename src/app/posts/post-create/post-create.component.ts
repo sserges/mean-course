@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './post-create.component.html',
 })
 export class PostCreateComponent {
+  enteredValue = '';
   newPost = 'NO CONTENT';
 
   onAddPost() {
-    // tslint:disable-next-line: quotemark
-    this.newPost = "The user's post";
+    this.newPost = this.enteredValue;
   }
 }
