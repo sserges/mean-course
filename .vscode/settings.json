@@ -1,4 +1,5 @@
 {
     "prettier.jsxSingleQuote": true,
-    "deno.enable": false
+    "deno.enable": false,
+    "editor.formatOnSave": true
 }
