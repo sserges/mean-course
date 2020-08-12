@@ -49,6 +49,10 @@ export class PostsService {
     );
   }
 
+  getPost(id: string) {
+    return { ...this.posts.find(p => p.id === id) };
+  }
+
   deletePost(postId: string) {
     this.httpClient.delete(`http://localhost:3000/api/posts/${postId}`).subscribe(() => {
       const updatedPosts = this.posts.filter(post => post.id !== postId);
