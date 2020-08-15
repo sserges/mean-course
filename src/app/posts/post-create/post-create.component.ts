@@ -17,6 +17,7 @@ export class PostCreateComponent implements OnInit {
   private mode = 'create';
   private postId: string;
   form: FormGroup;
+  imagePreview: string;
 
   constructor(
     private postsService: PostsService,
@@ -56,6 +57,12 @@ export class PostCreateComponent implements OnInit {
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({ image: file });
     this.form.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = (reader.result as string);
+    };
+    reader.readAsDataURL(file);
+    console.log(this.imagePreview);
   }
 
   onSavePost() {
