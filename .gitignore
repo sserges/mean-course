@@ -2,6 +2,8 @@
 
 .vscode/
 
+images/
+
 # compiled output
 /dist
 /tmp
