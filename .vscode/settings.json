@@ -1,5 +1,5 @@
 {
     "prettier.jsxSingleQuote": true,
     "deno.enable": false,
-    "editor.formatOnSave": true
+    "editor.tabSize": 2
 }
