@@ -56,14 +56,14 @@ export class PostsService {
 
     this.httpClient.post<{ message: string, post: Post }>('http://localhost:3000/api/posts', postData).subscribe(
       (response) => {
-        const post: Post = {
-          id: response.post.id,
-          imagePath: response.post.imagePath,
-          title,
-          content
-        };
-        this.posts.push(post);
-        this.postsUpdated.next([...this.posts]);
+        // const post: Post = {
+        //   id: response.post.id,
+        //   imagePath: response.post.imagePath,
+        //   title,
+        //   content
+        // };
+        // this.posts.push(post);
+        // this.postsUpdated.next([...this.posts]);
         this.router.navigate(['/']);
       }
     );
@@ -87,28 +87,24 @@ export class PostsService {
     }
     this.httpClient.put(`http://localhost:3000/api/posts/${id}`, postData).subscribe(
       response => {
-        const updatedPosts = [...this.posts];
-        const oldPostIndex = updatedPosts.findIndex(p => p.id === id);
-        const post: Post = {
-          id,
-          title,
-          content,
-          imagePath: 'response.imagePath'
-        };
-        updatedPosts[oldPostIndex] = post;
-        this.posts = updatedPosts;
-        this.postsUpdated.next([...this.posts]);
+        // const updatedPosts = [...this.posts];
+        // const oldPostIndex = updatedPosts.findIndex(p => p.id === id);
+        // const post: Post = {
+        //   id,
+        //   title,
+        //   content,
+        //   imagePath: 'response.imagePath'
+        // };
+        // updatedPosts[oldPostIndex] = post;
+        // this.posts = updatedPosts;
+        // this.postsUpdated.next([...this.posts]);
         this.router.navigate(['/']);
       }
     );
   }
 
   deletePost(postId: string) {
-    this.httpClient.delete(`http://localhost:3000/api/posts/${postId}`).subscribe(() => {
-      const updatedPosts = this.posts.filter(post => post.id !== postId);
-      this.posts = updatedPosts;
-      this.postsUpdated.next([...this.posts]);
-    });
+    return this.httpClient.delete(`http://localhost:3000/api/posts/${postId}`);
   }
 
 }
