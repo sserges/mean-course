@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class AuthService {
 
+  private isAuthenticated = false;
   private token: string;
   private authStatusListener = new Subject<boolean>();
 
@@ -29,11 +30,18 @@ export class AuthService {
     const authData: AuthData = {email, password};
     this.httpClient.post<{token: string}>('http://localhost:3000/api/users/login', authData).subscribe(response => {
       this.token = response.token;
-      this.authStatusListener.next(true);
+      if (this.token) {
+        this.isAuthenticated = true;
+        this.authStatusListener.next(true);
+      }
     });
   }
 
   getToken() {
     return this.token;
+  }
+
+  getIsAuth() {
+    return this.isAuthenticated;
   }
 }
