@@ -10,7 +10,6 @@ import { HeaderComponent } from './header/header.component';
 
 import { AngularMaterialModule } from './angular-material.module';
 import { PostsModule } from './posts/posts.module';
-import { AuthModule } from './auth/auth.module';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -30,8 +29,7 @@ import { ErrorComponent } from './error/error.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AngularMaterialModule,
-    PostsModule,
-    AuthModule
+    PostsModule
   ],
   providers: [
     {
