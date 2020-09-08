@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
 
 import { Post } from './post.model';
 
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = `${environment.apiUrl}/posts`;
+
 @Injectable({ providedIn: 'root' })
 export class PostsService {
   private posts: Post[] = [];
@@ -17,7 +21,7 @@ export class PostsService {
   getPosts(postsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     this.httpClient
-      .get<{ message: string, posts: any, maxPosts: number }>('http://localhost:3000/api/posts' + queryParams)
+      .get<{ message: string, posts: any, maxPosts: number }>(BACKEND_URL + queryParams)
       .pipe(map((postData) => {
         return {posts: postData.posts.map(post => {
           return {
@@ -52,7 +56,7 @@ export class PostsService {
       content: string,
       imagePath: string,
       creator: string
-    }>(`http://localhost:3000/api/posts/${id}`);
+    }>(`${BACKEND_URL}/${id}`);
   }
 
   addPost(title: string, content: string, image: File) {
@@ -61,7 +65,7 @@ export class PostsService {
     postData.append('content', content);
     postData.append('image', image, title);
 
-    this.httpClient.post<{ message: string, post: Post }>('http://localhost:3000/api/posts', postData).subscribe(
+    this.httpClient.post<{ message: string, post: Post }>(BACKEND_URL, postData).subscribe(
       (response) => {
         // const post: Post = {
         //   id: response.post.id,
@@ -93,7 +97,7 @@ export class PostsService {
         creator: null
       };
     }
-    this.httpClient.put(`http://localhost:3000/api/posts/${id}`, postData).subscribe(
+    this.httpClient.put(`${BACKEND_URL}/${id}`, postData).subscribe(
       response => {
         // const updatedPosts = [...this.posts];
         // const oldPostIndex = updatedPosts.findIndex(p => p.id === id);
@@ -112,7 +116,7 @@ export class PostsService {
   }
 
   deletePost(postId: string) {
-    return this.httpClient.delete(`http://localhost:3000/api/posts/${postId}`);
+    return this.httpClient.delete(`${BACKEND_URL}/${postId}`);
   }
 
 }
