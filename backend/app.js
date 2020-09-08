@@ -9,7 +9,7 @@ const usersRoutes = require('./routes/users');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://will:DKzkbi9BHEvl88Ed@cluster0-p34fz.mongodb.net/mean-course?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://will:${process.env.MONGO_ATLAS_PW}@cluster0-p34fz.mongodb.net/mean-course?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
